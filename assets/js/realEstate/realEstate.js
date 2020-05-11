@@ -3,23 +3,25 @@ import ReactDOM from 'react-dom'
 import Header from './Header';
 import Filter from './Filter';
 import Listings from './Listings';
+import listingsData from './data/listingsData';
 
 class App extends Component {
   constructor () {
     super()
     this.state = {
-      name: 'Joe'
+      listingsData
     }
+    this.change = this.change.bind(this);
   }
-  clickedBtn = () => {
+  change = () => {
     console.log('swag')
   }
   render () {
     return (<div>
       <Header />
       <section id="content-area">
-        <Filter />
-        <Listings />
+        <Filter change={this.change} />
+        <Listings listingsData={this.state.listingsData} />
       </section>
       </div>)
   }

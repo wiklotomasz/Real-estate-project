@@ -13,7 +13,7 @@ export default class Header extends Component {
   render () {
     return (<section id="filter" className="inside">
       <h4>Filter</h4>
-      <select name="neighberhood" className="filters neighbourhood">
+      <select name="neighberhood" className="filters neighbourhood" onChange={this.props.change}>
         <option>Jezyce</option>
         <option>Grunwald</option>
         <option>Wilda</option>
