@@ -11,7 +11,7 @@
   display: inline-block;
   float: left;
 
-  .inside {
+  &.inside {
     padding: 20px;
     max-width: 300px;
   }
@@ -135,7 +135,7 @@
       color: white;
       padding: 15px;
       position: relative;
-      background: url("http://cdn.freshome.com/wp-content/uploads/2014/04/Gorgeous-evening-view-of-Russet-Residence--1025x450.jpg") no-repeat center center;
+      background: url("https://cdn.pixabay.com/photo/2019/12/22/17/13/snuggle-4713013__480.jpg") no-repeat center center;
       -webkit-background-size: cover;
       -moz-background-size: cover;
       -o-background-size: cover;
@@ -200,7 +200,7 @@
           border-radius: 50%;
           border: 2px solid white;
           display: inline-block;
-          background: url("http://cdn.freshome.com/wp-content/uploads/2014/04/Gorgeous-evening-view-of-Russet-Residence--1025x450.jpg") no-repeat center center;
+          background: url("https://cdn.pixabay.com/photo/2019/12/22/17/13/snuggle-4713013__480.jpg") no-repeat center center;
           -webkit-background-size: cover;
           -moz-background-size: cover;
           -o-background-size: cover;
