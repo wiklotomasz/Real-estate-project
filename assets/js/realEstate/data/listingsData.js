@@ -4,8 +4,8 @@ export const listingsData = [
         city: 'Warsaw',
         state: 'Mazowieckie',
         rooms: 2,
-        price: 440000,
-        floorSpace: 2000,
+        price: 44,
+        floorSpace: 10,
         extras: [
             'elevator',
             'gym'

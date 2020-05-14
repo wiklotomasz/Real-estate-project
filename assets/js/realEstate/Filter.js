@@ -14,49 +14,52 @@ export default class Header extends Component {
     return (<section id="filter" className="inside">
       <h4>Filter</h4>
       <select name="neighberhood" className="filters neighbourhood" onChange={this.props.change}>
-        <option>Jezyce</option>
-        <option>Grunwald</option>
-        <option>Wilda</option>
-        <option>Piatkowo</option>
+        <option value="Jezyce">Jezyce</option>
+        <option value="Grunwald">Grunwald</option>
+        <option value="Wilda">Wilda</option>
+        <option value="Piatkowo">Piatkowo</option>
       </select>
-      <select name="housetype" className="filters housetype">
-        <option>Ranch</option>
+      <select name="housetype" className="filters housetype" onChange={this.props.change}>
+        <option value="Ranch">Ranch</option>
+        <option value="Apartment">Apartment</option>
+        <option value="Studio">Studio</option>
+        <option value="Room">Room</option>
       </select>
-      <select name="bedrooms" className="filters bedrooms">
-        <option>1</option>
-        <option>2</option>
-        <option>3</option>
-        <option>4</option>
+      <select name="bedrooms" className="filters bedrooms" onChange={this.props.change}>
+        <option value="1">1 BR</option>
+        <option value="2">2 BR</option>
+        <option value="3">3 BR</option>
+        <option value="4">4 BR</option>
       </select>
       <div className="filters price"> 
         <span className="title">Price</span>
-        <input type="text" name="min-price" />
-        <input type="text" name="max-price" />
+        <input type="text" name="minPrice" onChange={this.props.change} value={this.props.globalState.minPrice} />
+        <input type="text" name="maxPrice" onChange={this.props.change} value={this.props.globalState.maxPrice} />
       </div>
       <div className="filters floor-space"> 
-        <span className="title">Price</span>
-        <input type="text" name="min-floor-space" />
-        <input type="text" name="max-floor-space" />
+        <span className="title">Floor space</span>
+        <input type="text" name="minFloorSpace" onChange={this.props.change} value={this.props.globalState.minFloorSpace} />
+        <input type="text" name="maxFloorSpace" onChange={this.props.change} value={this.props.globalState.maxFloorSpace} />
       </div>
       <div className="filters extras">
         <span className="title">
           Extras
         </span>
-        <label for="extras">
+        <label htmlFor="extras">
           <span>Elevators</span>
-          <input name="extras" value="elevator" type="checkbox" />
+          <input name="elevator" value="elevator" type="checkbox" onChange={this.props.change} />
         </label>
-        <label for="extras">
+        <label htmlFor="extras">
           <span>Swimmingpool</span>
-          <input name="extras" value="swimming-pool" type="checkbox" />
+          <input name="swimmingPool" value="swimmingPool" type="checkbox" onChange={this.props.change} />
         </label>
-        <label for="extras">
+        <label htmlFor="extras">
           <span>Finished basement</span>
-          <input name="extras" value="finished basement" type="checkbox" />
+          <input name="finishedBasement" value="finishedBasement" type="checkbox" onChange={this.props.change} />
         </label>
-        <label for="extras">
+        <label htmlFor="extras">
           <span>gym</span>
-          <input name="extras" value="gym" type="checkbox" />
+          <input name="gym" value="gym" type="checkbox" onChange={this.props.change} />
         </label>
       </div>
     </section>)

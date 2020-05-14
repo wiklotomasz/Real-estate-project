@@ -10,9 +10,14 @@ export default class Header extends Component {
   }
   loopListings = () => {
     const {listingsData} = this.props;
+
+    if(listingsData === undefined || listingsData.length === 0) {
+      return (<h1>Sorry no listings found</h1>);
+    }
+
     return listingsData.map((listing, index) => {
       return (
-        <div className="col-md-3" key={index}>
+        <div className="col-sm-6 col-lg-3" key={index}>
           <div className="listing">
             <div className="listing-img" style={{background: `url("${listing.image}") no-repeat center center`}}>
               <span className="address">{listing.address}</span>
