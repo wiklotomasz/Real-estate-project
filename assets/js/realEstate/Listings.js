@@ -37,7 +37,7 @@ export default class Header extends Component {
                     </div>
                     <div className="bedrooms">
                       <i className="fa fa-bed" aria-hidden="true"></i>
-                      <span>5 bedrooms</span>
+                      <span>{listing.bedrooms} bedrooms</span>
                     </div>
                   </div>
 
@@ -49,7 +49,7 @@ export default class Header extends Component {
               <span className="price">${listing.price}</span>
               <span className="location">
                 <i className="fa fa-map-marker" aria-hidden="true"></i>
-                {listing.city}, {listing.state}
+                {listing.neighbourhood}, {listing.state}
               </span>
             </div>
           </div>

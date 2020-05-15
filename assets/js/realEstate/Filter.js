@@ -6,30 +6,50 @@ export default class Header extends Component {
     this.state = {
       name: 'Joe'
     }
+    this.neighbourhoods = this.neighbourhoods.bind(this);
+    this.homeTypes = this.homeTypes.bind(this);
+    this.bedroomsList = this.bedroomsList.bind(this);
   }
-  clickedBtn = () => {
-    console.log('swag')
+  componentWillMount() {
+    this.props.populateAction();
+  }
+  neighbourhoods() {
+    if (this.props.globalState.populateFormsData.neighbourhoods !== undefined) {
+      var { neighbourhoods } = this.props.globalState.populateFormsData;
+      return neighbourhoods.map((item) => {
+        return <option key={item} value={item}>{item}</option>
+      })
+    }
+  }
+  homeTypes() {
+    if (this.props.globalState.populateFormsData.homeTypes !== undefined) {
+      var { homeTypes } = this.props.globalState.populateFormsData;
+      return homeTypes.map((item) => {
+        return <option key={item} value={item}>{item}</option>
+      })
+    }
+  }
+  bedroomsList() {
+    if (this.props.globalState.populateFormsData.bedroomsList !== undefined) {
+      var { bedroomsList } = this.props.globalState.populateFormsData;
+      return bedroomsList.map((item) => {
+        return <option key={item} value={item}>{item}+ BR</option>
+      })
+    }
   }
   render () {
     return (<section id="filter" className="inside">
       <h4>Filter</h4>
-      <select name="neighberhood" className="filters neighbourhood" onChange={this.props.change}>
-        <option value="Jezyce">Jezyce</option>
-        <option value="Grunwald">Grunwald</option>
-        <option value="Wilda">Wilda</option>
-        <option value="Piatkowo">Piatkowo</option>
+      <select name="neighbourhood" className="filters neighbourhood" onChange={this.props.change}>
+        <option value="all">All neighbourhoods</option>
+        {this.neighbourhoods()}
       </select>
-      <select name="housetype" className="filters housetype" onChange={this.props.change}>
-        <option value="Ranch">Ranch</option>
-        <option value="Apartment">Apartment</option>
-        <option value="Studio">Studio</option>
-        <option value="Room">Room</option>
+      <select name="homeType" className="filters homeType" onChange={this.props.change}>
+        <option value="all">All types</option>
+        {this.homeTypes()}
       </select>
       <select name="bedrooms" className="filters bedrooms" onChange={this.props.change}>
-        <option value="1">1 BR</option>
-        <option value="2">2 BR</option>
-        <option value="3">3 BR</option>
-        <option value="4">4 BR</option>
+        {this.bedroomsList()}
       </select>
       <div className="filters price"> 
         <span className="title">Price</span>
@@ -58,7 +78,7 @@ export default class Header extends Component {
           <input name="finishedBasement" value="finishedBasement" type="checkbox" onChange={this.props.change} />
         </label>
         <label htmlFor="extras">
-          <span>gym</span>
+          <span>Gym</span>
           <input name="gym" value="gym" type="checkbox" onChange={this.props.change} />
         </label>
       </div>

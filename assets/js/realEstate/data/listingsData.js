@@ -1,58 +1,77 @@
 export const listingsData = [
     {
         address: 'Katowicka 20',
+        neighbourhood: 'Jezyce',
         city: 'Warsaw',
         state: 'Mazowieckie',
-        rooms: 2,
+        bedrooms: 2,
         price: 44,
         floorSpace: 10,
         extras: [
             'elevator',
             'gym'
         ],
-        homeType: 'Appartment',
+        homeType: 'Apartment',
         image: 'https://cdn.pixabay.com/photo/2019/12/22/17/13/snuggle-4713013__480.jpg'
     },
     {
         address: 'Miedzyborska 20',
+        neighbourhood: 'Jezyce',
         city: 'Poznan',
         state: 'Wielkopolska',
-        rooms: 3,
+        bedrooms: 3,
         price: 220000,
         floorSpace: 2000,
         extras: [
             'elevator',
             'gym'
         ],
-        homeType: 'Appartment',
+        homeType: 'Apartment',
         image: 'http://naruszeniedobrosobistych.com/wp-content/uploads/2017/10/pexels-photo-186077.jpeg'
     },
     {
         address: 'Miedzyborska 20',
+        neighbourhood: 'Wilda',
         city: 'Warsaw',
         state: 'Mazowieckie',
-        rooms: 3,
+        bedrooms: 1,
         price: 220000,
         floorSpace: 2000,
         extras: [
             'elevator',
             'gym'
         ],
-        homeType: 'Appartment',
+        homeType: 'Apartment',
         image: 'http://naruszeniedobrosobistych.com/wp-content/uploads/2017/10/pexels-photo-186077.jpeg'
     },
     {
         address: 'Miedzyborska 20',
+        neighbourhood: 'Wilda',
         city: 'Warsaw',
         state: 'Mazowieckie',
-        rooms: 3,
+        bedrooms: 3,
         price: 220000,
         floorSpace: 2000,
         extras: [
             'elevator',
             'gym'
         ],
-        homeType: 'Appartment',
+        homeType: 'Studio',
+        image: 'https://cdn.pixabay.com/photo/2019/12/22/17/13/snuggle-4713013__480.jpg'
+    },
+    {
+        address: 'Miedzyborska 20',
+        neighbourhood: 'Grunwald',
+        city: 'Warsaw',
+        state: 'Mazowieckie',
+        bedrooms: 3,
+        price: 220000,
+        floorSpace: 2000,
+        extras: [
+            'elevator',
+            'gym'
+        ],
+        homeType: 'Studio',
         image: 'https://cdn.pixabay.com/photo/2019/12/22/17/13/snuggle-4713013__480.jpg'
     }
 ];

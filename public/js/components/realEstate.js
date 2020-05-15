@@ -32,17 +32,67 @@ var Header = function (_Component) {
 
     var _this = _possibleConstructorReturn(this, (Header.__proto__ || Object.getPrototypeOf(Header)).call(this));
 
-    _this.clickedBtn = function () {
-      console.log('swag');
-    };
-
     _this.state = {
       name: 'Joe'
     };
+    _this.neighbourhoods = _this.neighbourhoods.bind(_this);
+    _this.homeTypes = _this.homeTypes.bind(_this);
+    _this.bedroomsList = _this.bedroomsList.bind(_this);
     return _this;
   }
 
   _createClass(Header, [{
+    key: 'componentWillMount',
+    value: function componentWillMount() {
+      this.props.populateAction();
+    }
+  }, {
+    key: 'neighbourhoods',
+    value: function neighbourhoods() {
+      if (this.props.globalState.populateFormsData.neighbourhoods !== undefined) {
+        var neighbourhoods = this.props.globalState.populateFormsData.neighbourhoods;
+
+        return neighbourhoods.map(function (item) {
+          return _react2.default.createElement(
+            'option',
+            { key: item, value: item },
+            item
+          );
+        });
+      }
+    }
+  }, {
+    key: 'homeTypes',
+    value: function homeTypes() {
+      if (this.props.globalState.populateFormsData.homeTypes !== undefined) {
+        var homeTypes = this.props.globalState.populateFormsData.homeTypes;
+
+        return homeTypes.map(function (item) {
+          return _react2.default.createElement(
+            'option',
+            { key: item, value: item },
+            item
+          );
+        });
+      }
+    }
+  }, {
+    key: 'bedroomsList',
+    value: function bedroomsList() {
+      if (this.props.globalState.populateFormsData.bedroomsList !== undefined) {
+        var bedroomsList = this.props.globalState.populateFormsData.bedroomsList;
+
+        return bedroomsList.map(function (item) {
+          return _react2.default.createElement(
+            'option',
+            { key: item, value: item },
+            item,
+            '+ BR'
+          );
+        });
+      }
+    }
+  }, {
     key: 'render',
     value: function render() {
       return _react2.default.createElement(
@@ -55,75 +105,28 @@ var Header = function (_Component) {
         ),
         _react2.default.createElement(
           'select',
-          { name: 'neighberhood', className: 'filters neighbourhood', onChange: this.props.change },
+          { name: 'neighbourhood', className: 'filters neighbourhood', onChange: this.props.change },
           _react2.default.createElement(
             'option',
-            { value: 'Jezyce' },
-            'Jezyce'
+            { value: 'all' },
+            'All neighbourhoods'
           ),
-          _react2.default.createElement(
-            'option',
-            { value: 'Grunwald' },
-            'Grunwald'
-          ),
-          _react2.default.createElement(
-            'option',
-            { value: 'Wilda' },
-            'Wilda'
-          ),
-          _react2.default.createElement(
-            'option',
-            { value: 'Piatkowo' },
-            'Piatkowo'
-          )
+          this.neighbourhoods()
         ),
         _react2.default.createElement(
           'select',
-          { name: 'housetype', className: 'filters housetype', onChange: this.props.change },
+          { name: 'homeType', className: 'filters homeType', onChange: this.props.change },
           _react2.default.createElement(
             'option',
-            { value: 'Ranch' },
-            'Ranch'
+            { value: 'all' },
+            'All types'
           ),
-          _react2.default.createElement(
-            'option',
-            { value: 'Apartment' },
-            'Apartment'
-          ),
-          _react2.default.createElement(
-            'option',
-            { value: 'Studio' },
-            'Studio'
-          ),
-          _react2.default.createElement(
-            'option',
-            { value: 'Room' },
-            'Room'
-          )
+          this.homeTypes()
         ),
         _react2.default.createElement(
           'select',
           { name: 'bedrooms', className: 'filters bedrooms', onChange: this.props.change },
-          _react2.default.createElement(
-            'option',
-            { value: '1' },
-            '1 BR'
-          ),
-          _react2.default.createElement(
-            'option',
-            { value: '2' },
-            '2 BR'
-          ),
-          _react2.default.createElement(
-            'option',
-            { value: '3' },
-            '3 BR'
-          ),
-          _react2.default.createElement(
-            'option',
-            { value: '4' },
-            '4 BR'
-          )
+          this.bedroomsList()
         ),
         _react2.default.createElement(
           'div',
@@ -191,7 +194,7 @@ var Header = function (_Component) {
             _react2.default.createElement(
               'span',
               null,
-              'gym'
+              'Gym'
             ),
             _react2.default.createElement('input', { name: 'gym', value: 'gym', type: 'checkbox', onChange: this.props.change })
           )
@@ -400,7 +403,8 @@ var Header = function (_Component) {
                       _react2.default.createElement(
                         "span",
                         null,
-                        "5 bedrooms"
+                        listing.bedrooms,
+                        " bedrooms"
                       )
                     )
                   ),
@@ -425,7 +429,7 @@ var Header = function (_Component) {
                 "span",
                 { className: "location" },
                 _react2.default.createElement("i", { className: "fa fa-map-marker", "aria-hidden": "true" }),
-                listing.city,
+                listing.neighbourhood,
                 ", ",
                 listing.state
               )
@@ -546,43 +550,58 @@ Object.defineProperty(exports, "__esModule", {
 });
 var listingsData = exports.listingsData = [{
     address: 'Katowicka 20',
+    neighbourhood: 'Jezyce',
     city: 'Warsaw',
     state: 'Mazowieckie',
-    rooms: 2,
+    bedrooms: 2,
     price: 44,
     floorSpace: 10,
     extras: ['elevator', 'gym'],
-    homeType: 'Appartment',
+    homeType: 'Apartment',
     image: 'https://cdn.pixabay.com/photo/2019/12/22/17/13/snuggle-4713013__480.jpg'
 }, {
     address: 'Miedzyborska 20',
+    neighbourhood: 'Jezyce',
     city: 'Poznan',
     state: 'Wielkopolska',
-    rooms: 3,
+    bedrooms: 3,
     price: 220000,
     floorSpace: 2000,
     extras: ['elevator', 'gym'],
-    homeType: 'Appartment',
+    homeType: 'Apartment',
     image: 'http://naruszeniedobrosobistych.com/wp-content/uploads/2017/10/pexels-photo-186077.jpeg'
 }, {
     address: 'Miedzyborska 20',
+    neighbourhood: 'Wilda',
     city: 'Warsaw',
     state: 'Mazowieckie',
-    rooms: 3,
+    bedrooms: 1,
     price: 220000,
     floorSpace: 2000,
     extras: ['elevator', 'gym'],
-    homeType: 'Appartment',
+    homeType: 'Apartment',
     image: 'http://naruszeniedobrosobistych.com/wp-content/uploads/2017/10/pexels-photo-186077.jpeg'
 }, {
     address: 'Miedzyborska 20',
+    neighbourhood: 'Wilda',
     city: 'Warsaw',
     state: 'Mazowieckie',
-    rooms: 3,
+    bedrooms: 3,
     price: 220000,
     floorSpace: 2000,
     extras: ['elevator', 'gym'],
-    homeType: 'Appartment',
+    homeType: 'Studio',
+    image: 'https://cdn.pixabay.com/photo/2019/12/22/17/13/snuggle-4713013__480.jpg'
+}, {
+    address: 'Miedzyborska 20',
+    neighbourhood: 'Grunwald',
+    city: 'Warsaw',
+    state: 'Mazowieckie',
+    bedrooms: 3,
+    price: 220000,
+    floorSpace: 2000,
+    extras: ['elevator', 'gym'],
+    homeType: 'Studio',
     image: 'https://cdn.pixabay.com/photo/2019/12/22/17/13/snuggle-4713013__480.jpg'
 }];
 
@@ -624,6 +643,8 @@ var _listingsData2 = _interopRequireDefault(_listingsData);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -653,16 +674,65 @@ var App = function (_Component) {
 
     _this.filterData = function () {
       var newData = _this.state.listingsData.filter(function (item) {
-        return item.price >= _this.state.minPrice && item.price <= _this.state.maxPrice && item.floorSpace >= _this.state.minFloorSpace && item.floorSpace <= _this.state.maxFloorSpace;
+        return item.price >= _this.state.minPrice && item.price <= _this.state.maxPrice && item.floorSpace >= _this.state.minFloorSpace && item.floorSpace <= _this.state.maxFloorSpace && item.bedrooms >= _this.state.bedrooms;
       });
+
+      if (_this.state.neighbourhood !== 'all') {
+        newData = newData.filter(function (item) {
+          return item.neighbourhood === _this.state.neighbourhood;
+        });
+      }
+
+      if (_this.state.homeType !== 'all') {
+        newData = newData.filter(function (item) {
+          return item.homeType === _this.state.homeType;
+        });
+      }
 
       _this.setState({
         filteredData: newData
       });
     };
 
+    _this.populateForms = function () {
+      // neighbourhood
+      var neighbourhoods = _this.state.listingsData.map(function (item) {
+        return item.neighbourhood;
+      });
+      neighbourhoods = new Set(neighbourhoods);
+      neighbourhoods = [].concat(_toConsumableArray(neighbourhoods));
+
+      // homeType
+      var homeTypes = _this.state.listingsData.map(function (item) {
+        return item.homeType;
+      });
+      homeTypes = new Set(homeTypes);
+      homeTypes = [].concat(_toConsumableArray(homeTypes));
+
+      // bedrooms
+      var bedroomsList = _this.state.listingsData.map(function (item) {
+        return item.bedrooms;
+      });
+      bedroomsList = bedroomsList.sort();
+      bedroomsList = new Set(bedroomsList);
+      bedroomsList = [].concat(_toConsumableArray(bedroomsList));
+
+      _this.setState({
+        populateFormsData: {
+          homeTypes: homeTypes,
+          neighbourhoods: neighbourhoods,
+          bedroomsList: bedroomsList
+        }
+      }, function () {
+        console.log(_this.state.populateFormsData);
+      });
+    };
+
     _this.state = {
       listingsData: _listingsData2.default,
+      neighbourhood: 'all',
+      homeType: 'all',
+      bedrooms: 0,
       minPrice: 0,
       maxPrice: 500000,
       minFloorSpace: 0,
@@ -671,10 +741,12 @@ var App = function (_Component) {
       swimmingPool: false,
       finishedBasement: false,
       gym: false,
-      filteredData: _listingsData2.default
+      filteredData: _listingsData2.default,
+      populateFormsData: []
     };
     _this.change = _this.change.bind(_this);
-    _this.filteredData = _this.change.bind(_this);
+    _this.filterData = _this.filterData.bind(_this);
+    _this.populateForms = _this.populateForms.bind(_this);
     return _this;
   }
 
@@ -688,7 +760,7 @@ var App = function (_Component) {
         _react2.default.createElement(
           'section',
           { id: 'content-area' },
-          _react2.default.createElement(_Filter2.default, { change: this.change, globalState: this.state }),
+          _react2.default.createElement(_Filter2.default, { change: this.change, globalState: this.state, populateAction: this.populateForms }),
           _react2.default.createElement(_Listings2.default, { listingsData: this.state.filteredData })
         )
       );
