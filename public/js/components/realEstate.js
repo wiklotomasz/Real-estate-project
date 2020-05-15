@@ -331,110 +331,108 @@ var Header = function (_Component) {
     var _this = _possibleConstructorReturn(this, (Header.__proto__ || Object.getPrototypeOf(Header)).call(this));
 
     _this.loopListings = function () {
-      var _this$props = _this.props,
-          listingsData = _this$props.listingsData,
-          view = _this$props.view;
+      var listingsData = _this.props.listingsData;
 
 
       if (listingsData === undefined || listingsData.length === 0) {
         return _react2.default.createElement(
-          "h1",
+          'h1',
           null,
-          "Sorry no listings found"
+          'Sorry no listings found'
         );
       }
 
-      var layout = view === 'grid' ? 'col-lg-6 col-xl-3' : '';
+      var layout = _this.props.globalState.view === 'grid' ? 'col-lg-6 col-xl-3' : '';
 
       return listingsData.map(function (listing, index) {
         return _react2.default.createElement(
-          "div",
-          { className: "col-sm-12 " + layout, key: index },
+          'div',
+          { className: 'col-sm-12 ' + layout, key: index },
           _react2.default.createElement(
-            "div",
-            { className: "listing" },
+            'div',
+            { className: 'listing' },
             _react2.default.createElement(
-              "div",
-              { className: "listing-img", style: { background: "url(\"" + listing.image + "\") no-repeat center center" } },
+              'div',
+              { className: 'listing-img', style: { background: 'url("' + listing.image + '") no-repeat center center' } },
               _react2.default.createElement(
-                "span",
-                { className: "address" },
+                'span',
+                { className: 'address' },
                 listing.address
               ),
               _react2.default.createElement(
-                "div",
-                { className: "details" },
+                'div',
+                { className: 'details' },
                 _react2.default.createElement(
-                  "div",
-                  { className: "col-md-3" },
-                  _react2.default.createElement("div", { className: "user-img" })
+                  'div',
+                  { className: 'col-md-3' },
+                  _react2.default.createElement('div', { className: 'user-img' })
                 ),
                 _react2.default.createElement(
-                  "div",
-                  { className: "col-md-9" },
+                  'div',
+                  { className: 'col-md-9' },
                   _react2.default.createElement(
-                    "div",
-                    { className: "user-details" },
+                    'div',
+                    { className: 'user-details' },
                     _react2.default.createElement(
-                      "span",
-                      { className: "user-name" },
-                      "Tom Hanks"
+                      'span',
+                      { className: 'user-name' },
+                      'Tom Hanks'
                     ),
                     _react2.default.createElement(
-                      "span",
-                      { className: "post-date" },
-                      "05/05/2017"
+                      'span',
+                      { className: 'post-date' },
+                      '05/05/2017'
                     )
                   ),
                   _react2.default.createElement(
-                    "div",
-                    { className: "listing-details" },
+                    'div',
+                    { className: 'listing-details' },
                     _react2.default.createElement(
-                      "div",
-                      { className: "floor-space" },
-                      _react2.default.createElement("i", { className: "fa fa-square-o", "aria-hidden": "true" }),
+                      'div',
+                      { className: 'floor-space' },
+                      _react2.default.createElement('i', { className: 'fa fa-square-o', 'aria-hidden': 'true' }),
                       _react2.default.createElement(
-                        "span",
+                        'span',
                         null,
                         listing.floorSpace,
-                        " ft\xB2"
+                        ' ft\xB2'
                       )
                     ),
                     _react2.default.createElement(
-                      "div",
-                      { className: "bedrooms" },
-                      _react2.default.createElement("i", { className: "fa fa-bed", "aria-hidden": "true" }),
+                      'div',
+                      { className: 'bedrooms' },
+                      _react2.default.createElement('i', { className: 'fa fa-bed', 'aria-hidden': 'true' }),
                       _react2.default.createElement(
-                        "span",
+                        'span',
                         null,
                         listing.bedrooms,
-                        " bedrooms"
+                        ' bedrooms'
                       )
                     )
                   ),
                   _react2.default.createElement(
-                    "div",
-                    { className: "view-btn" },
-                    "Listing details"
+                    'div',
+                    { className: 'view-btn' },
+                    'Listing details'
                   )
                 )
               )
             ),
             _react2.default.createElement(
-              "div",
-              { className: "bottom-info" },
+              'div',
+              { className: 'bottom-info' },
               _react2.default.createElement(
-                "span",
-                { className: "price" },
-                "$",
+                'span',
+                { className: 'price' },
+                '$',
                 listing.price
               ),
               _react2.default.createElement(
-                "span",
-                { className: "location" },
-                _react2.default.createElement("i", { className: "fa fa-map-marker", "aria-hidden": "true" }),
+                'span',
+                { className: 'location' },
+                _react2.default.createElement('i', { className: 'fa fa-map-marker', 'aria-hidden': 'true' }),
                 listing.neighbourhood,
-                ", ",
+                ', ',
                 listing.state
               )
             )
@@ -443,92 +441,90 @@ var Header = function (_Component) {
       });
     };
 
-    _this.state = {
-      name: "Joe"
-    };
     _this.loopListings = _this.loopListings.bind(_this);
     return _this;
   }
 
   _createClass(Header, [{
-    key: "render",
+    key: 'render',
     value: function render() {
       return _react2.default.createElement(
-        "section",
-        { id: "listings" },
+        'section',
+        { id: 'listings' },
         _react2.default.createElement(
-          "section",
-          { className: "search-area" },
-          _react2.default.createElement("input", { type: "text", name: "search", onChange: this.props.change })
+          'section',
+          { className: 'search-area' },
+          _react2.default.createElement('input', { type: 'text', name: 'search', onChange: this.props.change })
         ),
         _react2.default.createElement(
-          "section",
-          { className: "sortby-area" },
+          'section',
+          { className: 'sortby-area' },
           _react2.default.createElement(
-            "div",
+            'div',
             null,
-            "390 results found"
+            this.props.globalState.filteredData.length,
+            ' results found'
           ),
           _react2.default.createElement(
-            "div",
-            { className: "sort-options" },
+            'div',
+            { className: 'sort-options' },
             _react2.default.createElement(
-              "select",
-              { name: "sortBy", id: "", className: "sortby", onChange: this.props.change },
+              'select',
+              { name: 'sortBy', id: '', className: 'sortby', onChange: this.props.change },
               _react2.default.createElement(
-                "option",
-                { value: "price-dsc" },
-                "Lowest price"
+                'option',
+                { value: 'price-dsc' },
+                'Lowest price'
               ),
               _react2.default.createElement(
-                "option",
-                { value: "price-asc" },
-                "Highest price"
+                'option',
+                { value: 'price-asc' },
+                'Highest price'
               )
             ),
             _react2.default.createElement(
-              "div",
-              { className: "view" },
-              _react2.default.createElement("i", { className: "fa fa-list", onClick: this.props.changeView.bind(null, 'list') }),
-              _react2.default.createElement("i", { className: "fa fa-th", onClick: this.props.changeView.bind(null, 'grid') })
+              'div',
+              { className: 'view' },
+              _react2.default.createElement('i', { className: 'fa fa-list', onClick: this.props.changeView.bind(null, 'list') }),
+              _react2.default.createElement('i', { className: 'fa fa-th', onClick: this.props.changeView.bind(null, 'grid') })
             )
           )
         ),
         _react2.default.createElement(
-          "section",
-          { className: "listings-results" },
+          'section',
+          { className: 'listings-results' },
           this.loopListings()
         ),
         _react2.default.createElement(
-          "section",
-          { id: "pagination" },
+          'section',
+          { id: 'pagination' },
           _react2.default.createElement(
-            "ul",
-            { className: "pages" },
+            'ul',
+            { className: 'pages' },
             _react2.default.createElement(
-              "li",
+              'li',
               null,
-              "Prev"
+              'Prev'
             ),
             _react2.default.createElement(
-              "li",
-              { className: "avtive" },
-              "1"
+              'li',
+              { className: 'avtive' },
+              '1'
             ),
             _react2.default.createElement(
-              "li",
+              'li',
               null,
-              "2"
+              '2'
             ),
             _react2.default.createElement(
-              "li",
+              'li',
               null,
-              "3"
+              '3'
             ),
             _react2.default.createElement(
-              "li",
+              'li',
               null,
-              "Next"
+              'Next'
             )
           )
         )
@@ -819,7 +815,7 @@ var App = function (_Component) {
           'section',
           { id: 'content-area' },
           _react2.default.createElement(_Filter2.default, { change: this.change, globalState: this.state, populateAction: this.populateForms }),
-          _react2.default.createElement(_Listings2.default, { change: this.change, changeView: this.changeView, view: this.state.view, listingsData: this.state.filteredData })
+          _react2.default.createElement(_Listings2.default, { globalState: this.state, change: this.change, changeView: this.changeView, listingsData: this.state.filteredData })
         )
       );
     }

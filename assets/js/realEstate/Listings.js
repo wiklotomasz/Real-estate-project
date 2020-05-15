@@ -3,19 +3,16 @@ import React, { Component } from "react";
 export default class Header extends Component {
   constructor() {
     super();
-    this.state = {
-      name: "Joe",
-    };
     this.loopListings = this.loopListings.bind(this);
   }
   loopListings = () => {
-    const {listingsData, view} = this.props;
+    const {listingsData} = this.props;
 
     if(listingsData === undefined || listingsData.length === 0) {
       return (<h1>Sorry no listings found</h1>);
     }
 
-    const layout = view === 'grid' ? 'col-lg-6 col-xl-3' : '';
+    const layout = this.props.globalState.view === 'grid' ? 'col-lg-6 col-xl-3' : '';
 
     return listingsData.map((listing, index) => {
       return (
@@ -67,7 +64,7 @@ export default class Header extends Component {
         </section>
 
         <section className="sortby-area">
-          <div>390 results found</div>
+          <div>{this.props.globalState.filteredData.length} results found</div>
           <div className="sort-options">
             <select name="sortBy" id="" className="sortby" onChange={this.props.change}>
               <option value="price-dsc">Lowest price</option>
@@ -81,7 +78,6 @@ export default class Header extends Component {
         </section>
 
         <section className="listings-results">
-
           {this.loopListings()}
         </section>
 

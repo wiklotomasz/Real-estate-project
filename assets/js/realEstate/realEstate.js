@@ -150,7 +150,7 @@ class App extends Component {
       <Header />
       <section id="content-area">
         <Filter change={this.change} globalState={this.state} populateAction={this.populateForms} />
-        <Listings change={this.change} changeView={this.changeView} view={this.state.view} listingsData={this.state.filteredData} />
+        <Listings globalState={this.state} change={this.change} changeView={this.changeView} listingsData={this.state.filteredData} />
       </section>
       </div>)
   }
