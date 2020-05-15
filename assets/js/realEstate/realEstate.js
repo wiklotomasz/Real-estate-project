@@ -24,7 +24,8 @@ class App extends Component {
       filteredData: listingsData,
       populateFormsData: [],
       sortBy: 'price-dsc',
-      view: 'box'
+      view: 'box',
+      search: ''
     }
     this.change = this.change.bind(this);
     this.changeView = this.changeView.bind(this);
@@ -44,13 +45,11 @@ class App extends Component {
   }
 
   change = (event) => {
-    console.log(event.target);
     const name = event.target.name;
     const value = (event.target.type === 'checkbox') ? event.target.checked : event.target.value;
     this.setState({
       [name]: value
     }, () => {
-      console.log(this.state);
       this.filterData();
     })
   }
@@ -58,8 +57,6 @@ class App extends Component {
   changeView = (view) => {
     this.setState({
       view
-    }, () => {
-      console.log(this.state);
     });
   }
 
@@ -93,6 +90,18 @@ class App extends Component {
     if(this.state.sortBy == 'price-asc') {
       newData = newData.sort((a, b) => {
         return (a.price <= b.price) ? 1 : -1
+      })
+    }
+
+    if(this.state.search !== '') {
+      newData = newData.filter((item) => {
+        var neighbourhood = item.neighbourhood.toLowerCase();
+        var searchText = this.state.search.toLowerCase();
+        var n = neighbourhood.match(searchText);
+
+        if (n !== null) {
+          return true;
+        }
       })
     }
 
@@ -133,9 +142,7 @@ class App extends Component {
         neighbourhoods,
         bedroomsList
       }
-    }, () => {
-      console.log(this.state.populateFormsData)
-    })
+    });
   }
 
   render () {

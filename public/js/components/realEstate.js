@@ -459,7 +459,7 @@ var Header = function (_Component) {
         _react2.default.createElement(
           "section",
           { className: "search-area" },
-          _react2.default.createElement("input", { type: "text", name: "search" })
+          _react2.default.createElement("input", { type: "text", name: "search", onChange: this.props.change })
         ),
         _react2.default.createElement(
           "section",
@@ -677,11 +677,9 @@ var App = function (_Component) {
     var _this = _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).call(this));
 
     _this.change = function (event) {
-      console.log(event.target);
       var name = event.target.name;
       var value = event.target.type === 'checkbox' ? event.target.checked : event.target.value;
       _this.setState(_defineProperty({}, name, value), function () {
-        console.log(_this.state);
         _this.filterData();
       });
     };
@@ -689,8 +687,6 @@ var App = function (_Component) {
     _this.changeView = function (view) {
       _this.setState({
         view: view
-      }, function () {
-        console.log(_this.state);
       });
     };
 
@@ -720,6 +716,18 @@ var App = function (_Component) {
       if (_this.state.sortBy == 'price-asc') {
         newData = newData.sort(function (a, b) {
           return a.price <= b.price ? 1 : -1;
+        });
+      }
+
+      if (_this.state.search !== '') {
+        newData = newData.filter(function (item) {
+          var neighbourhood = item.neighbourhood.toLowerCase();
+          var searchText = _this.state.search.toLowerCase();
+          var n = neighbourhood.match(searchText);
+
+          if (n !== null) {
+            return true;
+          }
         });
       }
 
@@ -759,8 +767,6 @@ var App = function (_Component) {
           neighbourhoods: neighbourhoods,
           bedroomsList: bedroomsList
         }
-      }, function () {
-        console.log(_this.state.populateFormsData);
       });
     };
 
@@ -780,7 +786,8 @@ var App = function (_Component) {
       filteredData: _listingsData2.default,
       populateFormsData: [],
       sortBy: 'price-dsc',
-      view: 'box'
+      view: 'box',
+      search: ''
     };
     _this.change = _this.change.bind(_this);
     _this.changeView = _this.changeView.bind(_this);
