@@ -5,7 +5,7 @@ export const listingsData = [
         city: 'Warsaw',
         state: 'Mazowieckie',
         bedrooms: 2,
-        price: 44,
+        price: 4004,
         floorSpace: 10,
         extras: [
             'elevator',
@@ -20,7 +20,7 @@ export const listingsData = [
         city: 'Poznan',
         state: 'Wielkopolska',
         bedrooms: 3,
-        price: 220000,
+        price: 111111114,
         floorSpace: 2000,
         extras: [
             'elevator',
@@ -35,7 +35,7 @@ export const listingsData = [
         city: 'Warsaw',
         state: 'Mazowieckie',
         bedrooms: 1,
-        price: 220000,
+        price: 500,
         floorSpace: 2000,
         extras: [
             'elevator',
@@ -61,11 +61,26 @@ export const listingsData = [
     },
     {
         address: 'Miedzyborska 20',
+        neighbourhood: 'Wilda',
+        city: 'Warsaw',
+        state: 'Mazowieckie',
+        bedrooms: 3,
+        price: 500,
+        floorSpace: 2000,
+        extras: [
+            'elevator',
+            'gym'
+        ],
+        homeType: 'Studio',
+        image: 'https://cdn.pixabay.com/photo/2019/12/22/17/13/snuggle-4713013__480.jpg'
+    },
+    {
+        address: 'Miedzyborska 20',
         neighbourhood: 'Grunwald',
         city: 'Warsaw',
         state: 'Mazowieckie',
         bedrooms: 3,
-        price: 220000,
+        price: 30,
         floorSpace: 2000,
         extras: [
             'elevator',

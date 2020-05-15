@@ -9,15 +9,17 @@ export default class Header extends Component {
     this.loopListings = this.loopListings.bind(this);
   }
   loopListings = () => {
-    const {listingsData} = this.props;
+    const {listingsData, view} = this.props;
 
     if(listingsData === undefined || listingsData.length === 0) {
       return (<h1>Sorry no listings found</h1>);
     }
 
+    const layout = view === 'grid' ? 'col-lg-6 col-xl-3' : '';
+
     return listingsData.map((listing, index) => {
       return (
-        <div className="col-sm-6 col-lg-3" key={index}>
+        <div className={`col-sm-12 ${layout}`} key={index}>
           <div className="listing">
             <div className="listing-img" style={{background: `url("${listing.image}") no-repeat center center`}}>
               <span className="address">{listing.address}</span>
@@ -67,13 +69,13 @@ export default class Header extends Component {
         <section className="sortby-area">
           <div>390 results found</div>
           <div className="sort-options">
-            <select name="sortby" id="" className="sortby">
-              <option value="price-asc">Highest price</option>
+            <select name="sortBy" id="" className="sortby" onChange={this.props.change}>
               <option value="price-dsc">Lowest price</option>
+              <option value="price-asc">Highest price</option>
             </select>
             <div className="view">
-              <i className="fa fa-list"></i>
-              <i className="fa fa-th"></i>
+              <i className="fa fa-list" onClick={this.props.changeView.bind(null, 'list')}></i>
+              <i className="fa fa-th" onClick={this.props.changeView.bind(null, 'grid')}></i>
             </div>
           </div>
         </section>

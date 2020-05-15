@@ -331,7 +331,9 @@ var Header = function (_Component) {
     var _this = _possibleConstructorReturn(this, (Header.__proto__ || Object.getPrototypeOf(Header)).call(this));
 
     _this.loopListings = function () {
-      var listingsData = _this.props.listingsData;
+      var _this$props = _this.props,
+          listingsData = _this$props.listingsData,
+          view = _this$props.view;
 
 
       if (listingsData === undefined || listingsData.length === 0) {
@@ -342,10 +344,12 @@ var Header = function (_Component) {
         );
       }
 
+      var layout = view === 'grid' ? 'col-lg-6 col-xl-3' : '';
+
       return listingsData.map(function (listing, index) {
         return _react2.default.createElement(
           "div",
-          { className: "col-sm-6 col-lg-3", key: index },
+          { className: "col-sm-12 " + layout, key: index },
           _react2.default.createElement(
             "div",
             { className: "listing" },
@@ -470,23 +474,23 @@ var Header = function (_Component) {
             { className: "sort-options" },
             _react2.default.createElement(
               "select",
-              { name: "sortby", id: "", className: "sortby" },
-              _react2.default.createElement(
-                "option",
-                { value: "price-asc" },
-                "Highest price"
-              ),
+              { name: "sortBy", id: "", className: "sortby", onChange: this.props.change },
               _react2.default.createElement(
                 "option",
                 { value: "price-dsc" },
                 "Lowest price"
+              ),
+              _react2.default.createElement(
+                "option",
+                { value: "price-asc" },
+                "Highest price"
               )
             ),
             _react2.default.createElement(
               "div",
               { className: "view" },
-              _react2.default.createElement("i", { className: "fa fa-list" }),
-              _react2.default.createElement("i", { className: "fa fa-th" })
+              _react2.default.createElement("i", { className: "fa fa-list", onClick: this.props.changeView.bind(null, 'list') }),
+              _react2.default.createElement("i", { className: "fa fa-th", onClick: this.props.changeView.bind(null, 'grid') })
             )
           )
         ),
@@ -554,7 +558,7 @@ var listingsData = exports.listingsData = [{
     city: 'Warsaw',
     state: 'Mazowieckie',
     bedrooms: 2,
-    price: 44,
+    price: 4004,
     floorSpace: 10,
     extras: ['elevator', 'gym'],
     homeType: 'Apartment',
@@ -565,7 +569,7 @@ var listingsData = exports.listingsData = [{
     city: 'Poznan',
     state: 'Wielkopolska',
     bedrooms: 3,
-    price: 220000,
+    price: 111111114,
     floorSpace: 2000,
     extras: ['elevator', 'gym'],
     homeType: 'Apartment',
@@ -576,7 +580,7 @@ var listingsData = exports.listingsData = [{
     city: 'Warsaw',
     state: 'Mazowieckie',
     bedrooms: 1,
-    price: 220000,
+    price: 500,
     floorSpace: 2000,
     extras: ['elevator', 'gym'],
     homeType: 'Apartment',
@@ -594,11 +598,22 @@ var listingsData = exports.listingsData = [{
     image: 'https://cdn.pixabay.com/photo/2019/12/22/17/13/snuggle-4713013__480.jpg'
 }, {
     address: 'Miedzyborska 20',
+    neighbourhood: 'Wilda',
+    city: 'Warsaw',
+    state: 'Mazowieckie',
+    bedrooms: 3,
+    price: 500,
+    floorSpace: 2000,
+    extras: ['elevator', 'gym'],
+    homeType: 'Studio',
+    image: 'https://cdn.pixabay.com/photo/2019/12/22/17/13/snuggle-4713013__480.jpg'
+}, {
+    address: 'Miedzyborska 20',
     neighbourhood: 'Grunwald',
     city: 'Warsaw',
     state: 'Mazowieckie',
     bedrooms: 3,
-    price: 220000,
+    price: 30,
     floorSpace: 2000,
     extras: ['elevator', 'gym'],
     homeType: 'Studio',
@@ -665,10 +680,17 @@ var App = function (_Component) {
       console.log(event.target);
       var name = event.target.name;
       var value = event.target.type === 'checkbox' ? event.target.checked : event.target.value;
-
       _this.setState(_defineProperty({}, name, value), function () {
         console.log(_this.state);
         _this.filterData();
+      });
+    };
+
+    _this.changeView = function (view) {
+      _this.setState({
+        view: view
+      }, function () {
+        console.log(_this.state);
       });
     };
 
@@ -689,6 +711,18 @@ var App = function (_Component) {
         });
       }
 
+      if (_this.state.sortBy == 'price-dsc') {
+        newData = newData.sort(function (a, b) {
+          return a.price >= b.price ? 1 : -1;
+        });
+      }
+
+      if (_this.state.sortBy == 'price-asc') {
+        newData = newData.sort(function (a, b) {
+          return a.price <= b.price ? 1 : -1;
+        });
+      }
+
       _this.setState({
         filteredData: newData
       });
@@ -701,6 +735,7 @@ var App = function (_Component) {
       });
       neighbourhoods = new Set(neighbourhoods);
       neighbourhoods = [].concat(_toConsumableArray(neighbourhoods));
+      neighbourhoods = neighbourhoods.sort();
 
       // homeType
       var homeTypes = _this.state.listingsData.map(function (item) {
@@ -708,14 +743,15 @@ var App = function (_Component) {
       });
       homeTypes = new Set(homeTypes);
       homeTypes = [].concat(_toConsumableArray(homeTypes));
+      homeTypes = homeTypes.sort();
 
       // bedrooms
       var bedroomsList = _this.state.listingsData.map(function (item) {
         return item.bedrooms;
       });
-      bedroomsList = bedroomsList.sort();
       bedroomsList = new Set(bedroomsList);
       bedroomsList = [].concat(_toConsumableArray(bedroomsList));
+      bedroomsList = bedroomsList.sort();
 
       _this.setState({
         populateFormsData: {
@@ -742,15 +778,30 @@ var App = function (_Component) {
       finishedBasement: false,
       gym: false,
       filteredData: _listingsData2.default,
-      populateFormsData: []
+      populateFormsData: [],
+      sortBy: 'price-dsc',
+      view: 'box'
     };
     _this.change = _this.change.bind(_this);
+    _this.changeView = _this.changeView.bind(_this);
     _this.filterData = _this.filterData.bind(_this);
     _this.populateForms = _this.populateForms.bind(_this);
     return _this;
   }
 
   _createClass(App, [{
+    key: 'componentWillMount',
+    value: function componentWillMount() {
+
+      var listingsData = this.state.listingsData.sort(function (a, b) {
+        return a.price > b.price ? 1 : -1;
+      });
+
+      this.setState({
+        listingsData: listingsData
+      });
+    }
+  }, {
     key: 'render',
     value: function render() {
       return _react2.default.createElement(
@@ -761,7 +812,7 @@ var App = function (_Component) {
           'section',
           { id: 'content-area' },
           _react2.default.createElement(_Filter2.default, { change: this.change, globalState: this.state, populateAction: this.populateForms }),
-          _react2.default.createElement(_Listings2.default, { listingsData: this.state.filteredData })
+          _react2.default.createElement(_Listings2.default, { change: this.change, changeView: this.changeView, view: this.state.view, listingsData: this.state.filteredData })
         )
       );
     }

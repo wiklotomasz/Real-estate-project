@@ -22,24 +22,45 @@ class App extends Component {
       finishedBasement: false,
       gym: false,
       filteredData: listingsData,
-      populateFormsData: []
+      populateFormsData: [],
+      sortBy: 'price-dsc',
+      view: 'box'
     }
     this.change = this.change.bind(this);
+    this.changeView = this.changeView.bind(this);
     this.filterData = this.filterData.bind(this);
     this.populateForms = this.populateForms.bind(this);
+  }
+
+  componentWillMount() {
+
+    const listingsData = this.state.listingsData.sort((a, b) => {
+      return (a.price > b.price) ? 1 : -1
+    })
+
+    this.setState({
+      listingsData
+    })
   }
 
   change = (event) => {
     console.log(event.target);
     const name = event.target.name;
     const value = (event.target.type === 'checkbox') ? event.target.checked : event.target.value;
-
     this.setState({
       [name]: value
     }, () => {
       console.log(this.state);
       this.filterData();
     })
+  }
+
+  changeView = (view) => {
+    this.setState({
+      view
+    }, () => {
+      console.log(this.state);
+    });
   }
 
   filterData = () => {
@@ -63,6 +84,18 @@ class App extends Component {
       })
     }
 
+    if(this.state.sortBy == 'price-dsc') {
+      newData = newData.sort((a, b) => {
+        return (a.price >= b.price) ? 1 : -1
+      })
+    }
+
+    if(this.state.sortBy == 'price-asc') {
+      newData = newData.sort((a, b) => {
+        return (a.price <= b.price) ? 1 : -1
+      })
+    }
+
     this.setState({
       filteredData: newData
     })
@@ -75,6 +108,7 @@ class App extends Component {
     });
     neighbourhoods = new Set(neighbourhoods);
     neighbourhoods = [...neighbourhoods];
+    neighbourhoods = neighbourhoods.sort();
 
 
     // homeType
@@ -83,14 +117,15 @@ class App extends Component {
     });
     homeTypes = new Set(homeTypes);
     homeTypes = [...homeTypes];
+    homeTypes = homeTypes.sort();
 
     // bedrooms
     var bedroomsList = this.state.listingsData.map((item) => {
       return item.bedrooms;
     });
-    bedroomsList = bedroomsList.sort();
     bedroomsList = new Set(bedroomsList);
     bedroomsList = [...bedroomsList];
+    bedroomsList = bedroomsList.sort();
 
     this.setState({
       populateFormsData: {
@@ -108,7 +143,7 @@ class App extends Component {
       <Header />
       <section id="content-area">
         <Filter change={this.change} globalState={this.state} populateAction={this.populateForms} />
-        <Listings listingsData={this.state.filteredData} />
+        <Listings change={this.change} changeView={this.changeView} view={this.state.view} listingsData={this.state.filteredData} />
       </section>
       </div>)
   }
